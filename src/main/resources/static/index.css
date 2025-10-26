@@ -1,0 +1,14 @@
+#quick-pick {
+    display: flex;
+    flex-direction: row;
+    min-height: 200px;
+    width: 80vw;
+    padding: 50px;
+}
+
+button {
+    min-width: 100px;
+    min-height: 100px;
+    border-radius: 1rem;
+    border: black solid 1px
+}
