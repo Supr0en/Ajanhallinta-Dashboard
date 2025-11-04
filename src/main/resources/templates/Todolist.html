@@ -3,8 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Todolist</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="TodoStyles.css" />
 </head>
 <body>
-
+    <a href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></svg>
+    </a>
+    <button onclick="window.location.href='addTodo'"> Add new Todo</button>
+    <div th:each="todo : ${todolist}">
+        <div class="todoItem">
+            <h3 th:text="${todo.name}"></h3>
+            <p th:text="${todo.description}"></p>
+            <p th:text="${todo.dueDate}"></p>
+            <a class="btn btn-danger" th:href="@{/deleteTodo/{id}(id=${todo.id})}">Delete</a>
+        </div>
+    </div>
 </body>
 </html>

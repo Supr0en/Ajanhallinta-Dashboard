@@ -4,14 +4,37 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="index.css" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
     <div>
-        <div id="quick-pick">
-            <button><a href="weekview">Week view</a></button>
-            <button><a href="todolist">Todolist</a></button>
-            <button><a href="notes">Notes</a></button>
-        </div>
+        <header id="quick-picks">
+            <h2 style="text-align: center">Quick-pick window</h2>
+            <div id="quick-picks window">
+                <button onclick="window.location.href='weekview'">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M160-240h160v-480H160v480Zm240 0h160v-480H400v480Zm240 0h160v-480H640v480Zm-480 80q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Z"/></svg>                </button>
+                <button onclick="window.location.href='todolist'">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M200-200v-560 454-85 191Zm0 80q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v320h-80v-320H200v560h280v80H200Zm494 40L552-222l57-56 85 85 170-170 56 57L694-80ZM320-440q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 160h240v-80H440v80Zm0-160h240v-80H440v80Z"/></svg>
+                </button>
+                <button onclick="window.location.href='notes'">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M640-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v440L640-120Zm-40-80v-80q0-33 23.5-56.5T680-360h80v-400H200v560h400ZM440-320h80v-240h120v-80H320v80h120v240Zm160 120Zm-400 0v-560 560Z"/></svg>
+                </button>
+            </div>
+        </header>
+        <section style="width: 70vw">
+            <div id="days-todos" style="width: 50%">
+                <h2>Today's todos</h2>
+                <div th:each="todo : ${todolist}">
+                    <p th:text="${todo.name}"></p>
+                </div>
+            </div>
+            <div id="today-events" style="width: 50%">
+                <h2>Today's events</h2>
+                <div th:each="event : ${eventlist}">
+                    <p th:text="${event.title} + ' Ajanjakso: ' + ${event.startTime} + ' - ' + ${event.endTime}"></p>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>

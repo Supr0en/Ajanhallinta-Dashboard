@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new Event</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="WeekViewStyles.css" />
+</head>
+<body>
+    <h1>Add new Event</h1>
+    <form class="eventForm" th:method="post" action="#" th:action="@{saveEvent}" th:object="${event}">
+        <label for="event-title">Name</label>
+        <input type="text" id="event-title" th:field="*{title}">
+        <label for="event-date">Date</label>
+        <input type="date" id="event-date" th:field="*{date}">
+        <label for="event-startTime">Start Time</label>
+        <input type="time" id="event-startTime" th:field="*{startTime}">
+        <label for="event-endTime">End Tme</label>
+        <input type="time" id="event-endTime" th:field="*{endTime}">
+        <input type="submit" class="btn btn-success" value="Add Event">
+    </form>
+</body>
+</html>
