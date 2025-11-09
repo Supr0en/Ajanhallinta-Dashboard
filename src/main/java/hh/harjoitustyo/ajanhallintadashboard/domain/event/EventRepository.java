@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
-  @Query("SELECT e FROM Event e WHERE e.appUser = :appUser OR e.team = :team AND e.date = :date")  
+  @Query("SELECT e FROM Event e WHERE (e.appUser = :appUser OR e.team = :team) AND e.date = :date")
   List<Event> findEventsForUserTeamAndDueDate(
     @Param("appUser") AppUser appUser, 
     @Param("team") Team team, 

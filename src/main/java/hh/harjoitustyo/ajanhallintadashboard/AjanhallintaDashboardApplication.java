@@ -28,7 +28,7 @@ public class AjanhallintaDashboardApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(TodoRepository todoRepository, EventRepository eventRepository, AppUserRepository appUserRepository, TeamRepository teamRepository) {
+    public CommandLineRunner DemoData(TodoRepository todoRepository, EventRepository eventRepository, AppUserRepository appUserRepository, TeamRepository teamRepository) {
         return (args) -> {
             log.info("save test Teams");
             Team team = new Team("Kayttajat");
