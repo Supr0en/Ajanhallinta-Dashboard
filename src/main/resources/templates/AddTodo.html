@@ -7,15 +7,20 @@
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
+    <header>
     <h1>Add new todo</h1>
-    <form class="todoForm" th:method="post" action="#" th:action="@{saveTodo}" th:object="${todo}">
+      <form class="todoForm" th:method="post" action="#" th:action="@{saveTodo}" th:object="${todo}">
         <label for="todo-name">Name</label>
-        <input type="text" id="todo-name" th:field="*{name}">
+        <input type="text" id="todo-name" th:field="*{name}" required>
         <label for="todo-description">Description</label>
-        <input type="text" id="todo-description" th:field="*{description}">
+        <input type="text" id="todo-description" th:field="*{description}" required>
         <label for="todo-dueDate">Due date</label>
-        <input type="date" id="todo-dueDate" th:field="*{dueDate}">
+        <input type="date" id="todo-dueDate" th:field="*{dueDate}" required>
+        <label for="todo-isPrivate">
+          Set to be private: <input type="checkbox" id="todo-isPrivate" th:field="*{isPrivate}">
+        </label>
         <input type="submit" class="btn btn-success" value="Add Todo">
-    </form>
+      </form>
+    </header>
 </body>
 </html>

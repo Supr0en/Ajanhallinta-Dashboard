@@ -6,7 +6,6 @@ import hh.harjoitustyo.ajanhallintadashboard.domain.security.AppUser;
 import hh.harjoitustyo.ajanhallintadashboard.domain.security.AppUserRepository;
 import hh.harjoitustyo.ajanhallintadashboard.domain.todo.Todo;
 import hh.harjoitustyo.ajanhallintadashboard.domain.todo.TodoRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,19 +30,21 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        List<Todo> todosList = (List<Todo>) todoRepository.findByDueDate(LocalDate.now());
-        List<Event> eventsList = (List<Event>) eventRepository.findByDate(LocalDate.now());
+    public String index(Model model, Principal principal) {
+        AppUser appUser = appUserRepository.findByUsername(principal.getName());
+        List<Todo> todosList = (List<Todo>) todoRepository.findTodosForUserTeamAndDueDate(appUser, appUser.getTeam(), LocalDate.now());
+        List<Event> eventsList = (List<Event>) eventRepository.findEventsForUserTeamAndDueDate(appUser, appUser.getTeam(), LocalDate.now());
 
         model.addAttribute("todolist", todosList);
         model.addAttribute("eventlist", eventsList);
         return "index"; // index.html - this will be dashboard page where you navigate to other pages
     }
     @GetMapping("/weekview")
-    public String weekview(Model model) {
+    public String weekview(Model model, Principal principal) {
+        AppUser appUser = appUserRepository.findByUsername(principal.getName());
         LocalDate today = LocalDate.now();
 
-        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        WeekFields weekFields = WeekFields.ISO;
         DayOfWeek firstDayOfWeek = weekFields.getFirstDayOfWeek();
 
         LocalDate startOfWeek = today.with(firstDayOfWeek);
@@ -56,7 +57,7 @@ public class MainController {
         Map<LocalDate, List<Event>> eventsByDay = new LinkedHashMap<>();
 
         for (LocalDate day : weekDays) {
-            List<Event> eventsList = eventRepository.findByDate(day);
+            List<Event> eventsList = eventRepository.findEventsForUserTeamAndDueDate(appUser, appUser.getTeam(), day);
             eventsList.sort(Comparator.comparing(Event::getStartTime));
             eventsByDay.put(day, eventsList);
         }
@@ -69,8 +70,10 @@ public class MainController {
     @GetMapping("/todolist")
     public String todolist(Model model, Principal principal) {
         AppUser appUser = appUserRepository.findByUsername(principal.getName());
-        List<Todo> todosList = (List<Todo>) todoRepository.findByAppUser(appUser);
-        model.addAttribute("todolist", todosList);
+        List<Todo> TodoList = (List<Todo>) todoRepository.findByAppUser(appUser);
+        List<Todo> TeamTodoList = (List<Todo>) todoRepository.findByTeam(appUser.getTeam());
+        model.addAttribute("teamTodoList", TeamTodoList);
+        model.addAttribute("todoList", TodoList);
         return "Todolist"; // Todolist.html
     }
     @GetMapping("/notes")

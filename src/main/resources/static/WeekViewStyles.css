@@ -2,14 +2,15 @@
     border-left: black 1px solid;
     border-right: black 1px solid;
     height: 80%;
-    max-width: 14.3%;
+    width: 14.3%;
     min-width: 14.3%;
+    max-width: 14.3%;
     text-align: center;
 }
 .container {
     margin-top: 50px;
     height: 80vh;
-    width: fit-content;
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -23,7 +24,7 @@
     display: flex;
     flex-direction: column;
 }
-body{
+header{
     display: flex;
     flex-direction: column;
     align-items: center;

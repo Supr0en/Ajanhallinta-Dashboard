@@ -27,10 +27,12 @@ public class AppUser {
     public AppUser() {
         this.username = null;
         this.passwordHash = null;
+        this.team = null;
     }
-    public AppUser(String username, String passwordHash) {
+    public AppUser(String username, String passwordHash, Team team) {
         this.username = username;
         this.passwordHash = passwordHash;
+        this.team = team;
     }
     public Long getId() {
         return id;

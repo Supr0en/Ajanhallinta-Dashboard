@@ -10,15 +10,29 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AppUser> members = new ArrayList<>();
+    public Team() {
+        super();
+        this.name = null;
+    }
+    public Team(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
     public List<AppUser> getMembers() {
         return members;
@@ -29,6 +43,6 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" + "id=" + id + ", members=" + getMembers() + '}';
+        return "Team{" + "id=" + id + ", name=" + getName() + getMembers() + '}';
     }
 }

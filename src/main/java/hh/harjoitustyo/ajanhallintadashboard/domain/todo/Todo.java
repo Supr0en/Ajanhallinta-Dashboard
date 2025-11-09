@@ -1,6 +1,7 @@
 package hh.harjoitustyo.ajanhallintadashboard.domain.todo;
 
 import hh.harjoitustyo.ajanhallintadashboard.domain.security.AppUser;
+import hh.harjoitustyo.ajanhallintadashboard.domain.security.Team;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -13,20 +14,29 @@ public class Todo {
     private String name;
     private String description;
     private LocalDate dueDate;
+    private boolean isPrivate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") // the foreign key column in Todo table
+    @ManyToOne
     private AppUser appUser;
+    
+    @ManyToOne
+    private Team team;
 
     public Todo() {
         this.name = null;
         this.description = null;
         this.dueDate = null;
+        this.isPrivate = false;
+        this.appUser = null;
+        this.team = null;
     }
-    public Todo(String name, String description, LocalDate dueDate) {
+    public Todo(String name, String description, LocalDate dueDate, boolean isPrivate, AppUser appUser, Team team) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
+        this.isPrivate = isPrivate;
+        this.appUser = appUser;
+        this.team = team;
     }
 
     public long getId() {
@@ -54,11 +64,23 @@ public class Todo {
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
+    public boolean getIsPrivate() {
+        return isPrivate;
+    }
+    public void setIsPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
     public AppUser getAppUser() {
         return appUser;
     }
     public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
+    }
+    public Team getTeam() {
+        return team;
+    }
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     @Override

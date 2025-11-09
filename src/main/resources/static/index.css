@@ -30,11 +30,12 @@ section {
     display: flex;
     flex-direction: row;
     border: black solid 1px;
-    padding: 10px;
+    padding: 0px 0px 0px 0px;
     width: 70vw;
+    border-radius: 10px;
     position: relative;
     margin: 10vh 15vw 5vh 15vw;
-    gap: 0.5rem;
+    gap: 1.5rem;
 }
 #days-todos {
     background-color: rgba(95, 158, 160, 0.4);
@@ -42,6 +43,18 @@ section {
 #today-events {
     background-color: rgba(255, 127, 80, 0.4);
 }
-#weekEvents, #days-todos {
+#today-events, #days-todos {
     height: 50vh;
+    padding: 2.5%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.todo-container, .event-container{
+  padding: 10px;
+  border: 1px rgba(128, 128, 128, 0.4) solid;
+  border-radius: 10px;
+  width: 95%;
+  height: 15%;
+  line-height: 12px;
+  margin-bottom: 10px;
 }

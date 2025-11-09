@@ -36,8 +36,15 @@ public class TodoController {
     }
     @PostMapping("/saveTodo")
     public String saveTodo(@ModelAttribute Todo todo, Principal principal) {
-        AppUser appUser = appUserRepository.findByUsername(principal.getName());
-        todo.setAppUser(appUser);
+        AppUser appUser = appUserRepository.findByUsername(principal.getName());     
+        if(todo.getIsPrivate()) {
+          todo.setTeam(null);
+          todo.setAppUser(appUser);
+        } else {
+          todo.setTeam(appUser.getTeam());
+          todo.setAppUser(null);
+        }
+
         todoRepository.save(todo);
         return "redirect:/todolist"; // redirect back to todolist
     }
