@@ -20,7 +20,7 @@ public class NoteController {
     InputStreamResource resource = new InputStreamResource(inputStream);
 
     return ResponseEntity.ok()
-      .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"document.md\"")
+      .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"note.md\"")
       .contentType(MediaType.parseMediaType("text/markdown"))
       .body(resource);
   }

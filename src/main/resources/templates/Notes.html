@@ -17,7 +17,7 @@
 <div class="container">
   <div>
     <h3 class="text-center mb-4">Write Note/markdown file</h3>
-    <form id="markdownForm" action="/markdown/download" method="post">
+    <form id="markdownForm" th:action="@{/notes/download}" method="post">
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="content" class="form-label">Markdown Input</label>
@@ -39,16 +39,13 @@
   const textarea = document.getElementById('content');
   const preview = document.getElementById('preview');
 
-  // Function to render markdown to HTML
   function updatePreview() {
     const markdown = textarea.value;
     preview.innerHTML = marked.parse(markdown);
   }
 
-  // Update preview as the user types
   textarea.addEventListener('input', updatePreview);
 
-  // Initialize preview when the page loads
   updatePreview();
 </script>
 </body>
